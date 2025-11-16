@@ -1,7 +1,7 @@
 # dasa0739-FinalProjectIndividual
 This is the individual part of the creative coding major project in which I included time-based interactivity to the original code
 
-# 🎡 Wheel of Fortune — Time-Based Circle Animation (p5.js)
+# Wheel of Fortune — Time-Based Circle Animation (p5.js)
 
 This project is a reinterpretation of the theme **“Wheel of Fortune”** using time-based animation.  
 Instead of depicting luck or randomness literally, the artwork explores **life paths**—how people move through life at different paces, how plans change, and how events can shift direction unexpectedly.
@@ -23,7 +23,7 @@ Every circle evolves at its own pace, just like people.
 
 ---
 
-## ✨ **Conceptual Breakdown**
+##  **Conceptual Breakdown**
 
 ### **Why Wheel of Fortune?**
 The Wheel of Fortune archetype is usually about luck and unpredictability.  
@@ -44,7 +44,7 @@ Here, it represents:
 
 ---
 
-## ⏱ **Time-Based Interaction**
+##  **Time-Based Interaction**
 
 The project specifically uses **timers and time functions** rather than button-clicks or user input.
 
@@ -70,7 +70,6 @@ The project specifically uses **timers and time functions** rather than button-c
 
 # 🧠 **Technical Plan**
 
-### **1. Data Structure**
 ```js
 class CircleArt {
   constructor(radius, startDelay, rotationSpeed) {

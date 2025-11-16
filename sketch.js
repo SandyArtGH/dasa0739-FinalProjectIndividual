@@ -2,6 +2,8 @@
 // 800x800 Canvas – CircleArt Version
 // ========================
 let cnv;
+let circles = [];
+let startTime;
 
 /**
  * Initialize the canvas and set up the drawing environment
@@ -9,8 +11,25 @@ let cnv;
 function setup() {
   cnv = createCanvas(800, 800);
   centerCanvas();
-  noLoop();
+  // noLoop(); // removed so animation runs continuously
   angleMode(DEGREES);
+  startTime = millis();
+
+  // Initialize circles once
+  circles.push(new CircleArt(10, 10, 1.0, drawCircle6));
+  circles.push(new CircleArt(220, 180, 0.9, drawCircle4));
+  circles.push(new CircleArt(400, -30, 0.4, drawCircle7));
+  circles.push(new CircleArt(530, 180, 0.6, drawCircle8));
+  circles.push(new CircleArt(785, 80, 0.8, drawCircle4));
+
+  circles.push(new CircleArt(-45, 270, 0.9, drawCircle3));
+  circles.push(new CircleArt(154, 460, 1.4, drawCircle1));
+  circles.push(new CircleArt(434, 460, 1.4, drawCircle2));
+  circles.push(new CircleArt(760, 410, 1.2, drawCircle3));
+
+  circles.push(new CircleArt(20, 700, 1, drawCircle5));
+  circles.push(new CircleArt(295, 730, 1.1, drawCircle6));
+  circles.push(new CircleArt(610, 730, 0.7, drawCircle7));
 }
 
 /**
@@ -42,24 +61,77 @@ function draw() {
 
 /**
  * CircleArt class - represents a scalable, translatable circle composition
- * Each instance stores position, scale, and a custom drawing function
+ * Time-based behaviour: pop from centre -> move to target -> rotate -> fade
  */
 class CircleArt {
-  constructor(x, y, scale, drawFn) {
-    this.x = x;           // X position on canvas
-    this.y = y;           // Y position on canvas
-    this.scale = scale;   // Scale multiplier
-    this.drawFn = drawFn; // Drawing function for this circle
+  constructor(targetX, targetY, baseScale, drawFn) {
+    // stored target coords (original positions)
+    this.targetX = targetX;
+    this.targetY = targetY;
+
+    // start at centre
+    this.x = width / 2;
+    this.y = height / 2;
+
+    this.drawFn = drawFn;
+    this.baseScale = baseScale;
+
+    // rotation speed (degrees per ms) - spaced values for visible difference
+    this.speed = random([0.01, 0.03, 0.07, 0.12]); // ~10,30,70,120 deg/sec
+
+    // timing (ms)
+    this.startDelay = random(0, 3000);  // delay before pop/move
+    this.popDuration = 5000;            // pop-in duration (ms)
+    this.totalDuration = 30000;         // visible duration before fade
+    this.fadeDuration = 8000;           // fade-out duration (ms)
+
+    // runtime state
+    this.angle = 0;
+    this.alpha = 1;
   }
 
-  /**
-   * Display the circle at its position with its scale
-   */
   display() {
+    const elapsed = millis() - startTime;
+    const t = elapsed - this.startDelay;
+    if (t < 0) return; // not started yet
+
+    // pop progress 0..1
+    const popP = constrain(t / this.popDuration, 0, 1);
+    const eased = easeOutCubic(popP);
+
+    // position lerp center -> target
+    this.x = lerp(width / 2, this.targetX, eased);
+    this.y = lerp(height / 2, this.targetY, eased);
+
+    // scale
+    const currentScale = this.baseScale * eased;
+
+    // rotation (use deltaTime for frame independence)
+    this.angle += this.speed * deltaTime; // degrees
+
+    // alpha fade logic
+    if (t <= this.totalDuration) {
+      this.alpha = 1;
+    } else if (t <= this.totalDuration + this.fadeDuration) {
+      const fadeT = (t - this.totalDuration) / this.fadeDuration;
+      this.alpha = 1 - constrain(fadeT, 0, 1);
+    } else {
+      this.alpha = 0;
+    }
+
+    if (this.alpha <= 0) return;
+
+    // draw with transforms and alpha
     push();
+    drawingContext.save();
+    drawingContext.globalAlpha = this.alpha;
+
     translate(this.x, this.y);
-    scale(this.scale);
+    rotate(this.angle); // DEGREES mode
+    scale(currentScale);
     this.drawFn();
+
+    drawingContext.restore();
     pop();
   }
 }
@@ -110,33 +182,21 @@ function drawBackgroundGrid() {
   }
 }
 
-
 /**
  * Create and display all circle compositions
  * Each circle is positioned at specific coordinates with a unique drawing function
  */
 function drawAllCircles() {
-  const circles = [
-    new CircleArt(10, 10, 1.0, drawCircle6),
-    new CircleArt(220, 180, 0.9, drawCircle4),
-    new CircleArt(400, -30, 0.4, drawCircle7),
-    new CircleArt(530, 180, 0.6, drawCircle8),
-    new CircleArt(785, 80, 0.8, drawCircle4),
-
-    new CircleArt(-45, 270, 0.9, drawCircle3),
-    new CircleArt(154, 460, 1.4, drawCircle1),
-    new CircleArt(434, 460, 1.4, drawCircle2),
-    new CircleArt(760, 410, 1.2, drawCircle3),
-
-    new CircleArt(20, 700, 1, drawCircle5),
-    new CircleArt(295, 730, 1.1, drawCircle6),
-    new CircleArt(610, 730, 0.7, drawCircle7),
-  ];
-
-  // Display all circles
   for (const c of circles) {
     c.display();
   }
+}
+
+/**
+ * easing helper - cubic out for smooth pop
+ */
+function easeOutCubic(t) {
+  return 1 - pow(1 - t, 3);
 }
 
 /**

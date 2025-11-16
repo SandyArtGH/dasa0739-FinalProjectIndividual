@@ -54,21 +54,21 @@ The project specifically uses **timers and time functions** rather than button-c
 - Optional: `second()` or `minute()` could also influence speed  
 
 ### Behaviours implemented:
-- ⏳ **Staggered reveal:**  
+-  **Staggered reveal:**  
   Circles appear every *N* milliseconds, creating a build-up effect.
   
-- 🌀 **Individual rotation:**  
+-  **Individual rotation:**  
   Each circle has:
   - its own rotation speed  
   - its own rotation start delay  
   - continual clockwise rotation  
 
-- 🕰 **Continuous evolution:**  
+-  **Continuous evolution:**  
   Animation never resets — just like time, it always moves forward.
 
 ---
 
-# 🧠 **Technical Plan**
+#  **Technical Plan**
 
 ```js
 class CircleArt {

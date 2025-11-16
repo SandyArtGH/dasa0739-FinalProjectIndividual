@@ -1,46 +1,22 @@
 # dasa0739-FinalProjectIndividual
+**Sandy Asawaprecha dasa0739**
 This is the individual part of the creative coding major project in which I included time-based interactivity to the original code
 
 # Wheel of Fortune — Time-Based Circle Animation (p5.js)
 
-This project is a reinterpretation of the theme **“Wheel of Fortune”** using time-based animation.  
-Instead of depicting luck or randomness literally, the artwork explores **life paths**—how people move through life at different paces, how plans change, and how events can shift direction unexpectedly.
+![An image of Pacita Abad’s Wheel of Fortune (2000)](/Users/sansans/Desktop/Final version for individual part/dasa0739-FinalProjectIndividual/Pacita Abad Wheels of fortune.jpg)
 
-The animation uses layered circles that:
-- **Appear one-by-one over time** (like life stages unfolding)
-- **Rotate at different speeds**
-- **Start rotating at different times**
-- All circles rotate **clockwise**, symbolising how everyone moves through time together but not identically.
+## Introduction
+This project uses time-based animation to reinterpret Pacita Abad’s Wheel of Fortune (2000). While Abad’s work often reflects how the wheel weaves people together across cultural and societal boundaries, my interpretation focuses instead on how the wheel symbolizes the human life journey.
 
-The result is a meditative, clock-like movement expressing:
-- lives that follow expectations  
-- lives that diverge  
-- slow periods  
-- rapid bursts  
-- attempts to “change direction”  
+## Concept
+To express this idea, I plan to create a time-based animation that begins with the appearance of circles, followed by their spinning motion to represent life’s progression. At first, I considered making the circles spin both clockwise and anti-clockwise to suggest human effort in changing one’s destiny. However, I later decided that all circles should spin clockwise, as human life universally begins at the same point—birth—and eventually ends at the same point—death. Furthermore, the interpretation from the meaning of ‘Wheel of Fortune’ tarot card also further reinforces the decision to make all circles spin clock-wise. As human life is depicted as having its up and down moments (success and obstacles). As the tarot meaning of the reverse wheel of fortune A lack of recognition of life’s fluidity may lead to arrogant mistakes and karmic retribution. Take a moment to humble yourself before the Wheel and to experience life as it is.A person cannot fully control or go against it but instead keep going with the flow. 
 
-Every circle evolves at its own pace, just like people.
+## Animation Details
+Within this animation, some circles will move more slowly while others will move more quickly, reflecting the different paces of individual lives. The unique patterns within each circle will depict diverse life experiences. Through this, I aim to explore the concept of “living in your own time.” For example, one person might achieve success early, such as entering university at 15, but tragically die of cancer at 30. Another might struggle to find direction until nearly 30, yet later discover purpose and live until 90.
 
----
-
-##  **Conceptual Breakdown**
-
-### **Why Wheel of Fortune?**
-The Wheel of Fortune archetype is usually about luck and unpredictability.  
-Here, it represents:
-- Life going “according to plan” or the complete opposite  
-- Social expectations vs. personal choices  
-- Sudden turns (illness, opportunity, growth, setbacks)  
-- Individual pacing: some people “spin” faster, some slower  
-
-### **Interpretation in the animation**
-- The circles **appear from the center outward**, like life stages emerging.
-- Each circle begins rotating at a **unique time** based on a time variable (`millis()` offset).  
-- The differing speeds reflect how some people:
-  - move steadily  
-  - accelerate  
-  - plateau  
-  - or feel like they’re racing through time  
+## Background Design
+The background is drawn with different color by quadrant depicting red, blue, green, and orange color. This represents the fact that people in different geographical areas and have cultural differences (in relation to Pacita Abad) but are universal in terms of each person having their own individuality, fortune and luck, and life experiences. Moreover, all humans have to experience birth and death.
 
 ---
 

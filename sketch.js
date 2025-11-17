@@ -1,12 +1,13 @@
 // ========================
-// 800x800 Canvas – CircleArt Version (Animated)
+// 800x800 Canvas – CircleArt Version 
 // ========================
 let cnv;
 
 // === circle animation array ===
 let animatedCircles = [];
-let appearGap = 600;    // delay between appearances (ms)
-let lifespan = 25000;   // each circle spins before disappearing
+let appearGap = 600;        // delay between appearances (ms)
+let lifespan = 16000;       // each circle spins before disappearing (~16s, total ~20s)
+let randomDisappearanceTimes = []; // random disappearance timing
 
 function setup() {
   cnv = createCanvas(800, 800);
@@ -33,10 +34,23 @@ function setup() {
     animatedCircles.push({
       art: baseCircles[i],
       angle: 0,
-      speed: random(0.3, 2.2),  // original, subtle random speed
+      speed: random(0.3, 2.2),  // subtle random speed
       appearTime: i * appearGap,
-      isDead: false
+      isDead: false,
+      disappearanceTime: 0        // will assign randomized disappearance times
     });
+  }
+
+  // --- Random Disappearance ---
+  let offsets = [];
+  for (let i = 0; i < animatedCircles.length; i++) {
+    offsets.push(random(lifespan * 0.5, lifespan));
+  }
+  // Shuffle offsets to break sequential pattern
+  randomDisappearanceTimes = offsets.sort(() => random() - 0.5);
+
+  for (let i = 0; i < animatedCircles.length; i++) {
+    animatedCircles[i].disappearanceTime = animatedCircles[i].appearTime + randomDisappearanceTimes[i];
   }
 }
 
@@ -64,9 +78,8 @@ function animateCircles() {
   for (let c of animatedCircles) {
     if (t < c.appearTime) continue;
 
-    let lifeT = t - c.appearTime;
-
-    if (lifeT > lifespan) {
+    // Random Disappearance
+    if (t > c.disappearanceTime) {
       c.isDead = true;
       continue;
     }
@@ -74,13 +87,12 @@ function animateCircles() {
     c.angle += c.speed;
   }
 
-  while (animatedCircles.length > 0 && animatedCircles[0].isDead) {
-    animatedCircles.shift();
-  }
+  // Remove circles that have disappeared
+  animatedCircles = animatedCircles.filter(c => !c.isDead);
 
+  // Draw remaining circles
   for (let c of animatedCircles) {
     if (t < c.appearTime) continue;
-
     push();
     translate(c.art.x, c.art.y);
     scale(c.art.scale);
@@ -90,7 +102,6 @@ function animateCircles() {
   }
 }
 
-// ------------------- CircleArt class + background grid + drawCircle1..8 -------------------
 class CircleArt {
   constructor(x, y, scale, drawFn) {
     this.x = x;
@@ -143,15 +154,7 @@ function drawBackgroundGrid() {
   }
 }
 
-// ==================== drawCircle1..8 functions ====================
-// Keep all your existing drawCircle1 to drawCircle8 functions here
-// (unchanged from your previous code)
-
-
-// ==================== drawCircle1..8 functions ====================
-// Keep all your existing drawCircle1 to drawCircle8 functions here
-// (unchanged from your previous code)
-
+// ==================== All 8 circles remain the same as group code ====================
 
 /**
  * ==================== CIRCLE #1: Purple Xingyuan ====================
@@ -505,3 +508,7 @@ function drawCircle8() {
   fill("#D84315");
   ellipse(0, 0, 80, 80);
 }
+
+
+
+

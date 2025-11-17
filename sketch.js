@@ -20,6 +20,7 @@ function easeOutQuad(t) {
   return 1 - (1 - t) * (1 - t);
 }
 
+//Implemented quadratic easing for natural animation curves.
 function easeInQuad(t) {
   return t * t;
 }
@@ -27,6 +28,8 @@ function easeInQuad(t) {
 function setup() {
   cnv = createCanvas(800, 800);
   centerCanvas();
+  //noLoop() removed to allow for animation
+  //use DEGREES for accuracy of the drawing of circle composition. Radians usage somehow break the composition.
   angleMode(DEGREES);
 
   const baseCircles = [
@@ -69,7 +72,7 @@ function setup() {
     circlesBySpeed.push({ index: i, speed: animatedCircles[i].speed });
   }
   
-  // Sort by speed descending (fastest first)
+  // Sort by speed descending (fastest first). Circles sorted by rotation speed to determine exit order. 
   circlesBySpeed.sort((a, b) => b.speed - a.speed);
   
   // Assign staggered disappearance times
@@ -87,7 +90,8 @@ function centerCanvas() {
   y = max(0, y);
   cnv.position(x, y);
 }
-
+//center it on the window
+//allow for animation to be fit-to-screen
 function windowResized() {
   centerCanvas();
 }
@@ -99,7 +103,9 @@ function draw() {
 }
 
 function animateCircles() {
-  let t = millis();
+  //Used millis to create precise timestamp-based animation rather than frame-based animation.
+  
+  let t = millis(); 
 
   for (let c of animatedCircles) {
     if (t < c.appearTime) continue;
@@ -142,7 +148,7 @@ function animateCircles() {
     scale(c.art.scale);
     rotate(c.angle);
     
-    // Apply opacity to the entire drawing context
+    // Accessed HTML Canvas API for unified opacity control. This apply opacity to the entire drawing context
     drawingContext.globalAlpha = opacity / 255;
     
     c.art.drawFn();

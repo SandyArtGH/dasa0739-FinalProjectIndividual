@@ -45,6 +45,39 @@ In addition, the background is drawn with different color by quadrant depicting 
 
 ## A short technical explanation of how my individual code works to animate the image and any appropriate references
 
+### How my individual code works to animate the image
+
+1. **Animation Loop & Time-Based Rotation**
+   * Removed `noLoop()` to allow `draw()` to run continuously, enabling smooth, ongoing animation.
+   * Introduced a time-based rotation system where each circle's rotation is controlled by `millis()` and individual speed values.
+
+2. **Random Speed Generation**
+   * Each circle is assigned a random rotation speed using `random(0.3, 2.2)` during setup.
+   * This creates varied visual rhythm across the composition—some circles spin slowly while others rotate rapidly.
+   * The speed value is stored in each circle's properties and remains constant throughout its lifetime, ensuring consistent clockwise rotation.
+
+3. **Circle Rotation & Lifespan Logic**
+   * Added properties to `CircleArt` including `angle`, `speed`, `appearTime`, `disappearanceTime`, and `lifePosition` to control individual circle behavior.
+   * Each circle appears sequentially with a 1000ms gap, rotates clockwise at its own randomized speed, then fades out after a 16-second lifespan.
+
+4. **Array Sorting for Speed-Based Disappearance**
+   * Circles are sorted by rotation speed to determine exit order using `circlesBySpeed.sort((a, b) => b.speed - a.speed)`.
+   * Fastest spinners receive the earliest `disappearanceTime`, creating a conceptual link between life pace and lifespan—those who "burn brightest, burn fastest" disappear first.
+   * JavaScript's `.sort()` method orders circles by descending speed, then assigns staggered disappearance times (1500ms gap) based on their sorted position.
+
+5. **Positioning & Coordinate System**
+   * Used `push()`, `pop()`, `translate()`, and `rotate()` functions to handle individual circle transformations without affecting others.
+   * Applied `scale()` to maintain the original size variations from the group code.
+
+6. **Fade In/Out with Easing**
+   * Implemented `lerp()` function to smoothly interpolate opacity values during fade transitions.
+   * Used easing functions (`easeOutQuad` for fade-in, `easeInQuad` for fade-out) to create natural, organic-feeling transitions rather than linear fading.
+   * Set `fadeOutDuration` to 2000ms for a dramatic, gradual exit effect.
+
+7. **Visual Consistency**
+   * Maintained the original color palette and design elements from the group code.
+   * The background grid remains static to emphasize the dynamic rotation of the circles.
+
 ### Change from group code
 
 I did not make a lot of change to the group base code. I use the 8 circles that we created and keep the still background. These are key changes I made to the file specifically on the circles. 

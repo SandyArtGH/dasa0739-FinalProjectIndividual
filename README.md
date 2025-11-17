@@ -149,13 +149,17 @@ circlesBySpeed.sort((a, b) => b.speed - a.speed);
 * Why: Creates conceptual link between life pace and lifespan—those who "burn brightest, burn fastest" disappear first.
 * How: JavaScript's `.sort()` method orders circles by descending speed, then assigns staggered disappearance times based on sorted position.
 
-#### Technique from Internet
+#### Technique from the Internet
 I drew coding inspiration for spinning the circles in a clock-wise motions from these two sources
 1. Inspiration from [Coding Train: Coding Challenge #74 - Clock with p5.js](https://www.youtube.com/watch?v=E4RyStef-gY)
 * I gain more understanding about using `push()`, `pop()`,`rotate()`,`map()`, function for clock-wise rotation
 
 2. Inspiration from [Jeff Thompson: Animation in P5JS – Basics: Rotation](https://www.youtube.com/watch?v=-YhzDuF_kLs)
 * Explains  `rotate()`, `translate()`, `push()`, `pop()`, radian. 
-* I gain more understanding about rotation to develop clock-wise rotation of the circles. 
+* I gain more understanding about rotation to develop clock-wise rotation of the circles.
+
+## Part 5: References
+* I acknowledge the use of AI tools such as ChatGPT and Claude for coding technique suggestions and paragraph refinement
+* Any AI-generated suggestions were treated as drafts, then manually tested, adjusted, and debugged before being included in the final code.
 
 

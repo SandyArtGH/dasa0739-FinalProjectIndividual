@@ -1,4 +1,6 @@
 # dasa0739-FinalProjectIndividual
+dasa0739_9103_tut02_final_individual_time
+
 Sandy Asawaprecha |unikey: dasa0739  
 
 This is the individual part of the creative coding major project in which I included time-based interactivity to the original code
@@ -31,7 +33,7 @@ To express this idea, I plan to create a time-based animation that begins with t
 
 ![Wheel of Fortune Tarot Card](Wheel_Tarot.png)
 
-Furthermore, the Wheel of Fortune tarot card reinforces the decision to make all circles spin clockwise. The card depicts human life as a cycle of ups and downs—moments of success and obstacles that we must navigate. According to the reversed Wheel of Fortune's meaning, "a lack of recognition of life's fluidity may lead to arrogant mistakes and karmic retribution. Take a moment to humble yourself before the wheel and to experience life as it is." This teaches us that human cannot fully control or resist life's natural flow- we can only move forward with it. The clockwise rotation symbolizes this universal truth: all lives begin at the same point (birth) and move inevitably toward the same destination (death), regardless of the pace or path each individual takes.
+Furthermore, the Wheel of Fortune tarot card reinforces the decision to make all circles spin clockwise. [The card](https://playingcarddecks.com/blogs/tarot-card-meanings/wheel-of-fortune-tarot-card-meanings-with-infographic) depicts human life as a cycle of ups and downs—moments of success and obstacles that we must navigate. [According to the reversed Wheel of Fortune's meaning](https://playingcarddecks.com/blogs/tarot-card-meanings/wheel-of-fortune-tarot-card-meanings-with-infographic), "a lack of recognition of life's fluidity may lead to arrogant mistakes and karmic retribution. Take a moment to humble yourself before the wheel and to experience life as it is." This teaches us that human cannot fully control or resist life's natural flow- we can only move forward with it. The clockwise rotation symbolizes this universal truth: all lives begin at the same point (birth) and move inevitably toward the same destination (death), regardless of the pace or path each individual takes.
 
 As the circles appear and begin spinning, each moves at a different randomized speed. Some circles spin slowly while others rotate rapidly, reflecting the varied paces at which individuals experience life. The unique visual patterns within each circle represent diverse life experiences and journeys.
 
@@ -76,7 +78,7 @@ Week 9: Transformations & Interpolation
 * map(): Converts time progress to opacity ranges
 
 #### Technique from outside the course
-1. I used millis() for Time-Based Control
+1. I used [millis() for Time-Based Control](https://p5js.org/reference/p5/millis/)
 * Used to create precise timestamp-based animation rather than frame-based animation.
 ```js
 let t = millis();  // Current time in milliseconds

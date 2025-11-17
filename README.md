@@ -69,7 +69,7 @@ I used course concept from week 5 and week 9 of IDEA9103 Creative Coding in this
 Week 5: Animation Fundamentals
 * angleMode(DEGREES): I considered using angleMode(RADIANS) but it disrupted the group's circle drawing functions so I continued using angleMode(degree) from group code for compatibility with existing circle formations. 
 
-Week 9: Transformations & Interpolation
+Week 9: Transformations & Easing
 * `rotate()`: Spins each circle independently at randomized speeds
 * `translate()`: Positions circles at specific canvas coordinates
 * `push()` or `pop()`: Isolates transformations to prevent interference between circles
@@ -114,7 +114,7 @@ circlesBySpeed.sort((a, b) => b.speed - a.speed);
 // Fastest spinner gets earliest disappearanceTime
 ```
 * Why: Creates conceptual link between life pace and lifespan—those who "burn brightest, burn fastest" disappear first.
-* How: JavaScript's .sort() method orders circles by descending speed, then assigns staggered disappearance times based on sorted position.
+* How: JavaScript's `.sort()` method orders circles by descending speed, then assigns staggered disappearance times based on sorted position.
 
 #### Technique from Internet
 I drew coding inspiration for spinning the circles in a clock-wise motions from these two sources

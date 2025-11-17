@@ -5,7 +5,6 @@ This is the individual part of the creative coding major project in which I incl
 
 # Wheel of Fortune — Time-Based Circle Animation (p5.js)
 
-<<<<<<< HEAD
 ## How to interact with the work:
 * As this is a time-based adaptation, there is no need to interact with the work.
 * Simply load the page and the animation will happen for a total duration of approximately 45 seconds. 
@@ -16,9 +15,6 @@ This is the individual part of the creative coding major project in which I incl
 * The animation will not continue indefinitely. 
 * Reload the page to start the new animation. The intro and outro would be the same. However, each circle will spin at a different random speed from the previous animation. 
 * The animation adapts to the screen size automatically. 
-=======
-![An image of Pacita Abad’s Wheel of Fortune (2000)](Pacita Abad Wheels of fortune.jpg)
->>>>>>> 6e670a938abbe63d357d0b0d5af586bcda4da698
 
 ## Details of my individual approach to animating the group code
 

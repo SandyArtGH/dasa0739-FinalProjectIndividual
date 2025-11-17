@@ -1,7 +1,9 @@
 // ========================
 // 800x800 Canvas – CircleArt Version - time-based animation, circle spin at random speed, phase out based on random speed (fastest - slowest)
 // ========================
-let cnv;
+
+//declares a variable named cnv that will later store the canvas object created in setup()
+let cnv; 
 
 // === circle animation array ===
 let animatedCircles = [];
@@ -158,7 +160,7 @@ function animateCircles() {
   // Reset global alpha
   drawingContext.globalAlpha = 1.0;
 }
-
+//added lifePosition to CircleArt class
 class CircleArt {
   constructor(x, y, scale, drawFn, lifePosition = 'edge') {
     this.x = x;
@@ -178,6 +180,7 @@ class CircleArt {
 }
 
 // ==================== Background grid ====================
+//remain the same as group code
 function drawBackgroundGrid() {
   const cols = ['#d14a2a', '#4c95e0', '#558f48', '#de7b2e'];
   const cell = width / 2;
@@ -213,7 +216,6 @@ function drawBackgroundGrid() {
 }
 
 // ==================== All 8 circles remain the same as group code ====================
-
 /**
  * ==================== CIRCLE #1: Purple Xingyuan ====================
  */

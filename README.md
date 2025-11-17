@@ -4,7 +4,7 @@ This is the individual part of the creative coding major project in which I incl
 
 # Wheel of Fortune — Time-Based Circle Animation (p5.js)
 
-![An image of Pacita Abad’s Wheel of Fortune (2000)](/Users/sansans/Desktop/Final version for individual part/dasa0739-FinalProjectIndividual/Pacita Abad Wheels of fortune.jpg)
+![An image of Pacita Abad’s Wheel of Fortune (2000)](Pacita Abad Wheels of fortune.jpg)
 
 ## Introduction
 This project uses time-based animation to reinterpret Pacita Abad’s Wheel of Fortune (2000). While Abad’s work often reflects how the wheel weaves people together across cultural and societal boundaries, my interpretation focuses instead on how the wheel symbolizes the human life journey.

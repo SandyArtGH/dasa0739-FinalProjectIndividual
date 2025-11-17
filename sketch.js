@@ -1,13 +1,28 @@
 // ========================
-// 800x800 Canvas – CircleArt Version 
+// 800x800 Canvas – CircleArt Version - time-based animation, circle spin at random speed, phase out based on random speed (fastest - slowest)
 // ========================
 let cnv;
 
 // === circle animation array ===
 let animatedCircles = [];
-let appearGap = 600;        // delay between appearances (ms)
+let appearGap = 1000;       // delay between appearances (ms) - increased for more visible intro
 let lifespan = 16000;       // each circle spins before disappearing (~16s, total ~20s)
 let randomDisappearanceTimes = []; // random disappearance timing
+let fadeInDuration = 0;     // no fade-in - circles appear instantly (birth is sudden)
+let fadeOutDuration = 2000; // fade-out duration (ms) - longer, more dramatic exit
+
+// Easing functions for smooth transitions
+function easeInOutCubic(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2;
+}
+
+function easeOutQuad(t) {
+  return 1 - (1 - t) * (1 - t);
+}
+
+function easeInQuad(t) {
+  return t * t;
+}
 
 function setup() {
   cnv = createCanvas(800, 800);
@@ -15,18 +30,18 @@ function setup() {
   angleMode(DEGREES);
 
   const baseCircles = [
-    new CircleArt(10, 10, 1.0, drawCircle6),
-    new CircleArt(220, 180, 0.9, drawCircle4),
-    new CircleArt(400, -30, 0.4, drawCircle7),
-    new CircleArt(530, 180, 0.6, drawCircle8),
-    new CircleArt(785, 80, 0.8, drawCircle4),
-    new CircleArt(-45, 270, 0.9, drawCircle3),
-    new CircleArt(154, 460, 1.4, drawCircle1),
-    new CircleArt(434, 460, 1.4, drawCircle2),
-    new CircleArt(760, 410, 1.2, drawCircle3),
-    new CircleArt(20, 700, 1, drawCircle5),
-    new CircleArt(295, 730, 1.1, drawCircle6),
-    new CircleArt(610, 730, 0.7, drawCircle7),
+    new CircleArt(10, 10, 1.0, drawCircle6, 'edge'),
+    new CircleArt(220, 180, 0.9, drawCircle4, 'mid'),
+    new CircleArt(400, -30, 0.4, drawCircle7, 'edge'),
+    new CircleArt(530, 180, 0.6, drawCircle8, 'mid'),
+    new CircleArt(785, 80, 0.8, drawCircle4, 'edge'),
+    new CircleArt(-45, 270, 0.9, drawCircle3, 'edge'),
+    new CircleArt(154, 460, 1.4, drawCircle1, 'center'),
+    new CircleArt(434, 460, 1.4, drawCircle2, 'center'),
+    new CircleArt(760, 410, 1.2, drawCircle3, 'edge'),
+    new CircleArt(20, 700, 1, drawCircle5, 'edge'),
+    new CircleArt(295, 730, 1.1, drawCircle6, 'center'),
+    new CircleArt(610, 730, 0.7, drawCircle7, 'edge'),
   ];
 
   // Wrap with animation timing
@@ -37,20 +52,31 @@ function setup() {
       speed: random(0.3, 2.2),  // subtle random speed
       appearTime: i * appearGap,
       isDead: false,
-      disappearanceTime: 0        // will assign randomized disappearance times
+      disappearanceTime: 0,        // will assign randomized disappearance times
+      lifePosition: baseCircles[i].lifePosition  // store whether center, mid, or edge
     });
   }
 
-  // --- Random Disappearance ---
-  let offsets = [];
+  // --- Disappearance based on spin speed ---
+  // Fastest spinners (fastest lives) disappear first, slowest last
+  // First, determine when the outro phase begins
+  let lastAppearTime = animatedCircles[animatedCircles.length - 1].appearTime;
+  let outroStartTime = lastAppearTime + lifespan;
+  
+  // Create array of circle indices sorted by speed (fastest to slowest)
+  let circlesBySpeed = [];
   for (let i = 0; i < animatedCircles.length; i++) {
-    offsets.push(random(lifespan * 0.5, lifespan));
+    circlesBySpeed.push({ index: i, speed: animatedCircles[i].speed });
   }
-  // Shuffle offsets to break sequential pattern
-  randomDisappearanceTimes = offsets.sort(() => random() - 0.5);
-
-  for (let i = 0; i < animatedCircles.length; i++) {
-    animatedCircles[i].disappearanceTime = animatedCircles[i].appearTime + randomDisappearanceTimes[i];
+  
+  // Sort by speed descending (fastest first)
+  circlesBySpeed.sort((a, b) => b.speed - a.speed);
+  
+  // Assign staggered disappearance times
+  let disappearGap = 1500; // time between each circle starting to fade out (ms)
+  for (let i = 0; i < circlesBySpeed.length; i++) {
+    let circleIndex = circlesBySpeed[i].index;
+    animatedCircles[circleIndex].disappearanceTime = outroStartTime + (i * disappearGap);
   }
 }
 
@@ -79,7 +105,7 @@ function animateCircles() {
     if (t < c.appearTime) continue;
 
     // Random Disappearance
-    if (t > c.disappearanceTime) {
+    if (t > c.disappearanceTime + fadeOutDuration) {
       c.isDead = true;
       continue;
     }
@@ -90,24 +116,50 @@ function animateCircles() {
   // Remove circles that have disappeared
   animatedCircles = animatedCircles.filter(c => !c.isDead);
 
-  // Draw remaining circles
+  // Draw remaining circles with eased fade in/out
   for (let c of animatedCircles) {
     if (t < c.appearTime) continue;
+    
+    // Calculate opacity based on fade in/out timing with easing
+    let opacity = 255;
+    
+    // Fade in with easeOutQuad (starts fast, ends slow)
+    if (t < c.appearTime + fadeInDuration) {
+      let fadeInProgress = (t - c.appearTime) / fadeInDuration;
+      let easedProgress = easeOutQuad(fadeInProgress);
+      opacity = lerp(0, 255, easedProgress);
+    }
+    
+    // Fade out with easeInQuad (starts slow, ends fast)
+    if (t > c.disappearanceTime) {
+      let fadeOutProgress = (t - c.disappearanceTime) / fadeOutDuration;
+      let easedProgress = easeInQuad(fadeOutProgress);
+      opacity = lerp(255, 0, easedProgress);
+    }
+    
     push();
     translate(c.art.x, c.art.y);
     scale(c.art.scale);
     rotate(c.angle);
+    
+    // Apply opacity to the entire drawing context
+    drawingContext.globalAlpha = opacity / 255;
+    
     c.art.drawFn();
     pop();
   }
+  
+  // Reset global alpha
+  drawingContext.globalAlpha = 1.0;
 }
 
 class CircleArt {
-  constructor(x, y, scale, drawFn) {
+  constructor(x, y, scale, drawFn, lifePosition = 'edge') {
     this.x = x;
     this.y = y;
     this.scale = scale;
     this.drawFn = drawFn;
+    this.lifePosition = lifePosition; // 'center', 'mid', or 'edge'
   }
 
   display() {
@@ -508,7 +560,3 @@ function drawCircle8() {
   fill("#D84315");
   ellipse(0, 0, 80, 80);
 }
-
-
-
-

@@ -64,21 +64,20 @@ I did not make a lot of change to the group base code. I use the 8 circles that 
 I used course concept from week 5 and week 9 of IDEA9103 Creative Coding in this assignment.
 
 #### Course Concepts Applied
-* Week 5: Animation Fundamentals
-angleMode(DEGREES): Maintained degree mode for compatibility with existing circle formations (considered RADIANS but it disrupted the group's circle drawing functions)
-Time-based animation principles: Applied timing and interval concepts
-* Week 9: Transformations & Interpolation
-rotate(): Spins each circle independently at randomized speeds
-translate(): Positions circles at specific canvas coordinates
-push() / pop(): Isolates transformations to prevent interference between circles
-scale(): Adjusts circle sizes proportionally
-lerp(): Smoothly interpolates opacity values during fade transitions
-map(): Converts time progress to opacity ranges
+Week 5: Animation Fundamentals
+* angleMode(DEGREES): I considered using angleMode(RADIANS) but it disrupted the group's circle drawing functions so I continued using angleMode(degree) from group code for compatibility with existing circle formations. 
+
+Week 9: Transformations & Interpolation
+* rotate(): Spins each circle independently at randomized speeds
+* translate(): Positions circles at specific canvas coordinates
+* push() or pop(): Isolates transformations to prevent interference between circles
+* scale(): Adjusts circle sizes proportionally in circleArt class
+* lerp(): Smoothly interpolates opacity values during fade transitions in fadeInDuration, fadeOutDuration. 
+* map(): Converts time progress to opacity ranges
 
 #### Technique from outside the course
-* I used millis() in p5js library
-* millis() for Time-Based Control
-Used to create precise timestamp-based animation rather than frame-based animation.
+1. I used millis() for Time-Based Control
+* Used to create precise timestamp-based animation rather than frame-based animation.
 ```js
 let t = millis();  // Current time in milliseconds
 if (t >= c.appearTime) { /* Circle appears */ }
@@ -86,7 +85,7 @@ if (t > c.disappearanceTime) { /* Circle fades */ }
 ```
 * Why: Ensures consistent timing across devices regardless of frame rate variations. Allows exact control over when each circle appears and disappears.
 
-* Easing Functions
+2. Easing Functions
 Implemented quadratic easing for natural animation curves:
 ```js
 function easeInQuad(t) {

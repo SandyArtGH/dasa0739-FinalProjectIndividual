@@ -24,7 +24,7 @@ In terms of my individual approach, I choose to drive my individual code with ti
 ## References to inspiration for animating your individual code
 ![Pacita Abad's wheel of fortune (2000)](Pacita_Abad.jpg)
 
-Both Pacita Abad's Wheels of Fortune (2000) and the Wheel of Fortune tarot card have inspired my approach to this time-based animation. Abad's work is characterized by vibrant colors and explores themes of cultural connections, and her trapunto paintings fuse textile, paint, and political narrative while creating work that crosses borders and artistic disciplines. While her work often reflects how visual patterns and circular forms connect people across cultural and societal boundaries, the title "Wheel of Fortune" prompted me to explore how the wheel symbolizes human life journey.
+Both Pacita Abad's Wheels of Fortune (2000) and the Wheel of Fortune tarot card have inspired my approach to this time-based animation. Abad's work is characterized by vibrant colors and explores themes of [cultural connections](https://www.sfmoma.org/read/pacita-abad-a-living-tapestry-of-places/), and her trapunto paintings fuse textile, paint, and political narrative while creating work that crosses borders and artistic disciplines. While her work often reflects how visual patterns and circular forms connect people across cultural and societal boundaries, the title "Wheel of Fortune" prompted me to explore how the wheel symbolizes human life journey.
 
 To express this idea, I plan to create a time-based animation that begins with the appearance of circles, followed by their spinning motion to represent life’s progression. At first, I considered making the circles spin both clockwise and anti-clockwise to suggest human effort in changing one’s destiny. However, I later decided that all circles should spin clockwise, as human life universally begins at the same point—birth—and eventually ends at the same point—death. 
 
@@ -39,7 +39,7 @@ Through this animation, I explore the concept of "living in your own time." For 
 
 At the animation's outro, circles begin to disappear one by one, starting with the fastest-spinning circles and ending with the slowest. This sequence embodies the metaphor that "those who burn brightest, burn fastest." Lives lived at an intense pace may be shorter, while those lived more slowly and deliberately may endure longer.This progression carries a deeper message: we should not compare our life's pace to others. Instead, we must focus on our own journey, keep moving forward, and trust that we will bloom in our own timeline.
 
-In addition, the background is drawn with different color by quadrant depicting red, blue, green, and orange color. In relation to Pacita Abad (2000)'s work, this represents the fact that people in different geographical areas and have cultural differences but are universal in terms of each person having their own individuality, fortune and luck, and life experiences. Moreover, all humans have to experience birth and death.
+In addition, the background is drawn with different color by quadrant depicting red, blue, green, and orange color. In relation to [Pacita Abad (2000)'s](https://www.artsy.net/artwork/pacita-abad-wheels-of-fortune) work, this represents the fact that people in different geographical areas and have cultural differences but are universal in terms of each person having their own individuality, fortune and luck, and life experiences. Moreover, all humans have to experience birth and death.
 
 ## A short technical explanation of how my individual code works to animate the image and any appropriate references
 
@@ -116,10 +116,10 @@ circlesBySpeed.sort((a, b) => b.speed - a.speed);
 
 #### Technique from Internet
 I drew coding inspiration for spinning the circles in a clock-wise motions from these two sources
-1. Inspiration from Coding Train: Coding Challenge #74 - Clock with p5.js
+1. Inspiration from [Coding Train: Coding Challenge #74 - Clock with p5.js](https://www.youtube.com/watch?v=E4RyStef-gY)
 * I gain more understanding about using push(), pop(), rotate(), map() function for clock-wise rotation
 
-2. Inspiration from Jeff Thompson: Animation in P5JS – Basics: Rotation 
+2. Inspiration from [Jeff Thompson: Animation in P5JS – Basics: Rotation](https://www.youtube.com/watch?v=-YhzDuF_kLs)
 * Explains rotate(), translate(), push(), pop(), radian. 
 * I gain more understanding about rotation to develop clock-wise rotation of the circles. 
 

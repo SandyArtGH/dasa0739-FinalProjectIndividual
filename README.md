@@ -21,7 +21,7 @@ This is the individual part of the creative coding major project in which I incl
 ## Details of my individual approach to animating the group code
 
 In terms of my individual approach, I choose to drive my individual code with time. 
- In the group code, there are 8 different circles. These circles will be animated while the background remain still. This will be different from other group members’ work as they use audio, user input and perlin noise to animate the still image. For example, user input. 
+ In the group code, there are 8 different circles. These circles will be animated while the background remain still. This will be different from other group members’ work as they use audio, user input and perlin noise to animate the still image. For example, another team member who used user input drew inspiration from the Watermelon game and modified the CircleArt class to make circles fall from the top of the screen, controlled by user clicks and hover actions. In contrast, my circles rotate clockwise automatically without any user input, with each circle spinning at different randomized speeds.
 
 ## References to inspiration for animating your individual code
 ![Pacita Abad's wheel of fortune (2000)](Pacita_Abad.jpg)
@@ -119,10 +119,10 @@ circlesBySpeed.sort((a, b) => b.speed - a.speed);
 #### Technique from Internet
 I drew coding inspiration for spinning the circles in a clock-wise motions from these two sources
 1. Inspiration from [Coding Train: Coding Challenge #74 - Clock with p5.js](https://www.youtube.com/watch?v=E4RyStef-gY)
-* I gain more understanding about using push(), pop(), rotate(), map() function for clock-wise rotation
+* I gain more understanding about using `push()`, `pop()`,`rotate()`,`map()`, function for clock-wise rotation
 
 2. Inspiration from [Jeff Thompson: Animation in P5JS – Basics: Rotation](https://www.youtube.com/watch?v=-YhzDuF_kLs)
-* Explains rotate(), translate(), push(), pop(), radian. 
+* Explains  `rotate()`, `translate()`, `push()`, `pop()`, radian. 
 * I gain more understanding about rotation to develop clock-wise rotation of the circles. 
 
 

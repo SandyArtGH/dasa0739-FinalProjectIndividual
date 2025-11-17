@@ -23,7 +23,7 @@ This is the individual part of the creative coding major project in which I incl
 In terms of my individual approach, I choose to drive my individual code with time. 
  In the group code, there are 8 different circles. These circles will be animated while the background remain still. This will be different from other group members’ work as they use audio, user input and perlin noise to animate the still image. For example, another team member who used user input drew inspiration from the Watermelon game and modified the CircleArt class to make circles fall from the top of the screen, controlled by user clicks and hover actions. In contrast, my circles rotate clockwise automatically without any user input, with each circle spinning at different randomized speeds.
 
-## Part 3:References to inspiration for animating your individual code
+## Part 3: References to inspiration for animating your individual code
 ![Pacita Abad's wheel of fortune (2000)](Pacita_Abad.jpg)
 
 Both Pacita Abad's Wheels of Fortune (2000) and the Wheel of Fortune tarot card have inspired my approach to this time-based animation. Abad's work is characterized by vibrant colors and explores themes of [cultural connections](https://www.sfmoma.org/read/pacita-abad-a-living-tapestry-of-places/), and her trapunto paintings fuse textile, paint, and political narrative while creating work that crosses borders and artistic disciplines. While her work often reflects how visual patterns and circular forms connect people across cultural and societal boundaries, the title "Wheel of Fortune" prompted me to explore how the wheel symbolizes human life journey.
@@ -43,7 +43,7 @@ At the animation's outro, circles begin to disappear one by one, starting with t
 
 In addition, the background is drawn with different color by quadrant depicting red, blue, green, and orange color. In relation to [Pacita Abad (2000)'s](https://www.artsy.net/artwork/pacita-abad-wheels-of-fortune) work, this represents the fact that people in different geographical areas and have cultural differences but are universal in terms of each person having their own individuality, fortune and luck, and life experiences. Moreover, all humans have to experience birth and death.
 
-## Part 3: Technical explanation of how my individual code works to animate the image and any appropriate references
+## Part 4: Technical explanation of how my individual code works to animate the image and any appropriate references
 
 ### How my individual code works to animate the image
 

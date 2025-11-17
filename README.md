@@ -95,7 +95,7 @@ function easeInQuad(t) {
 * Why: Linear interpolation feels mechanical. Easing adds emotional quality—the easeInQuad() function creates a fade-out that starts slowly and accelerates, symbolizing how life's end approaches gradually then arrives.
 * How: Takes normalized time (0-1), applies quadratic transformation, combines with lerp() for smooth opacity transitions.
 
-* drawingContext.globalAlpha (Canvas API)
+3. drawingContext.globalAlpha (Canvas API)
 Accessed HTML Canvas API for unified opacity control:
 ```js
 drawingContext.globalAlpha = opacity / 255;
@@ -105,7 +105,7 @@ drawingContext.globalAlpha = 1.0;  // Reset
 * Why: Each circle contains multiple elements with different colors (fills, strokes, nested shapes). p5.js lacks a simple way to fade entire compositions uniformly. globalAlpha applies transparency to everything drawn within its scope.
 * How: Accesses underlying Canvas 2D rendering context, sets opacity multiplier (0-1), resets after each circle.
 
-* Array Sorting for Speed-Based Disappearance
+4. Array Sorting for Speed-Based Disappearance
 Circles sorted by rotation speed to determine exit order:
 ```js
 circlesBySpeed.sort((a, b) => b.speed - a.speed);
@@ -115,6 +115,12 @@ circlesBySpeed.sort((a, b) => b.speed - a.speed);
 * How: JavaScript's .sort() method orders circles by descending speed, then assigns staggered disappearance times based on sorted position.
 
 #### Technique from Internet
-* Inspiration from Clock Challenge on the Coding Train Youtube channel.
-* Inspiration from P5 
+I drew coding inspiration for spinning the circles in a clock-wise motions from these two sources
+1. Inspiration from Coding Train: Coding Challenge #74 - Clock with p5.js
+* I gain more understanding about using push(), pop(), rotate(), map() function for clock-wise rotation
+
+2. Inspiration from Jeff Thompson: Animation in P5JS – Basics: Rotation 
+* Explains rotate(), translate(), push(), pop(), radian. 
+* I gain more understanding about rotation to develop clock-wise rotation of the circles. 
+
 

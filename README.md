@@ -43,54 +43,86 @@ In addition, the background is drawn with different color by quadrant depicting 
 
 ## A short technical explanation of how my individual code works to animate the image and any appropriate references
 
----
+### Change from group code
 
-##  **Time-Based Interaction**
+I did not make a lot of change to the group base code. I use the 8 circles that we created and keep the still background. These are key changes I made to the file specifically on the circles. 
 
-The project specifically uses **timers and time functions** rather than button-clicks or user input.
+1. Removed noLoop()
+Group code: Static display only
+My code: Continuous animation enabled through draw() loop
 
-### Time functions used:
-- `millis()` — controls when circles appear  
-- `millis()` — offsets rotation start time  
-- Optional: `second()` or `minute()` could also influence speed  
+2. Added Animation System
+Created animatedCircles array wrapping each circle with timing data:
+ {  art: CircleArt instance,  angle: 0,  speed: random(0.3, 2.2),  appearTime: i * 1000,  disappearanceTime: calculated,  isDead: false}
 
-### Behaviours implemented:
--  **Staggered reveal:**  
-  Circles appear every *N* milliseconds, creating a build-up effect.
-  
--  **Individual rotation:**  
-  Each circle has:
-  - its own rotation speed  
-  - its own rotation start delay  
-  - continual clockwise rotation  
+3. Enhanced CircleArt Class
+Added lifePosition property ('center', 'mid', or 'edge') to categorize circles for lifespan ordering
 
--  **Continuous evolution:**  
-  Animation never resets — just like time, it always moves forward.
+4. Implemented animateCircles() Function
+Replaced drawAllCircles() with time-based animation logic:
+Uses millis() to check appearance/disappearance timing
+Updates rotation: c.angle += c.speed
+Calculates opacity with easing functions
+Applies transformations: rotate(), translate(), scale()
+Controls fade with drawingContext.globalAlpha
 
----
+5. Speed-Based Disappearance
+Circles sorted by rotation speed
+Fastest spinners disappear first, slowest last
 
-#  **Technical Plan**
+### Tools and techniques from the course concept and outside of course concept
 
-```js
-class CircleArt {
-  constructor(radius, startDelay, rotationSpeed) {
-    this.radius = radius;
-    this.startDelay = startDelay;     // millis() value that determines when to begin spinning
-    this.rotationSpeed = rotationSpeed;
-    this.visible = false;
-  }
+I used course concept from week 5 and week 9 of IDEA9103 Creative Coding in this assignment.
 
-  update() {
-    if (millis() > this.startDelay) {
-      this.visible = true;
-    }
-  }
+#### Course Concepts Applied
+* Week 5: Animation Fundamentals
+angleMode(DEGREES): Maintained degree mode for compatibility with existing circle formations (considered RADIANS but it disrupted the group's circle drawing functions)
+Time-based animation principles: Applied timing and interval concepts
+* Week 9: Transformations & Interpolation
+rotate(): Spins each circle independently at randomized speeds
+translate(): Positions circles at specific canvas coordinates
+push() / pop(): Isolates transformations to prevent interference between circles
+scale(): Adjusts circle sizes proportionally
+lerp(): Smoothly interpolates opacity values during fade transitions
+map(): Converts time progress to opacity ranges
 
-  display() {
-    if (!this.visible) return;
-    push();
-    rotate((millis() - this.startDelay) / this.rotationSpeed);
-    ellipse(0, 0, this.radius * 2);
-    pop();
-  }
+#### Technique from outside the course
+* I used millis() in p5js library
+* millis() for Time-Based Control
+Used to create precise timestamp-based animation rather than frame-based animation.
+let t = millis();  // Current time in milliseconds
+if (t >= c.appearTime) { /* Circle appears */ }
+if (t > c.disappearanceTime) { /* Circle fades */ }
+
+Why: Ensures consistent timing across devices regardless of frame rate variations. Allows exact control over when each circle appears and disappears.
+
+* Easing Functions
+Implemented quadratic easing for natural animation curves:
+function easeInQuad(t) {
+  return t * t;  // Gradual start, quick finish
 }
+
+Why: Linear interpolation feels mechanical. Easing adds emotional quality—the easeInQuad() function creates a fade-out that starts slowly and accelerates, symbolizing how life's end approaches gradually then arrives.
+How: Takes normalized time (0-1), applies quadratic transformation, combines with lerp() for smooth opacity transitions.
+
+* drawingContext.globalAlpha (Canvas API)
+Accessed HTML Canvas API for unified opacity control:
+drawingContext.globalAlpha = opacity / 255;
+c.art.drawFn();  // All elements fade together
+drawingContext.globalAlpha = 1.0;  // Reset
+
+Why: Each circle contains multiple elements with different colors (fills, strokes, nested shapes). p5.js lacks a simple way to fade entire compositions uniformly. globalAlpha applies transparency to everything drawn within its scope.
+How: Accesses underlying Canvas 2D rendering context, sets opacity multiplier (0-1), resets after each circle.
+
+* Array Sorting for Speed-Based Disappearance
+Circles sorted by rotation speed to determine exit order:
+circlesBySpeed.sort((a, b) => b.speed - a.speed);
+// Fastest spinner gets earliest disappearanceTime
+
+Why: Creates conceptual link between life pace and lifespan—those who "burn brightest, burn fastest" disappear first.
+How: JavaScript's .sort() method orders circles by descending speed, then assigns staggered disappearance times based on sorted position.
+
+#### Technique from Internet
+* Inspiration from Clock Challenge on the Coding Train Youtube channel.
+* Inspiration from P5 
+
